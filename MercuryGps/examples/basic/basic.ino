@@ -14,7 +14,7 @@ Mercury venus();         // declare an instance of the library, passing the soft
 
 void setup() {
     Serial.begin(9600);     // set arduino to computer baud
-    // venus.begin(9600);      // set arduino to gps baud
+    venus.begin(9600);      // set arduino to gps baud
 
     Serial.println(F("\nStartup finished."));      // let me know whats happening.
 }
@@ -29,8 +29,8 @@ void loop() {
     //preferred method for grabbing the content from the library.
     for(int i = 0; i < 11; i++){
 
-    //   venus.readLine();         // read data from the gps and store in the library
-    //   venus.getLine(sentence);  // retreive that data from the library
+      venus.readLine();         // read data from the gps and store in the library
+      venus.getLine(sentence);  // retreive that data from the library
 
       Serial.println(sentence); // print that data
                                 // ???
@@ -44,9 +44,9 @@ void loop() {
     // make your own sentence variable like I do at the beginning of the loop. I
     // think this saves a little memory and clocks too if that's important to you.
     for(int i = 0; i < 11; i++){
-    //   venus.readLine();     //read data from gps and store in the sentence variable inside the library
+      venus.readLine();     //read data from gps and store in the sentence variable inside the library
 
-    //   Serial.println(venus.sentence);  //access the library sentence variable directly to print.
+      Serial.println(venus.sentence);  //access the library sentence variable directly to print.
     }
 
 }
