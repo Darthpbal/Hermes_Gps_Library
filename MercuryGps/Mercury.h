@@ -3,7 +3,6 @@
 #define Mercury_h
 
 #include "Arduino.h"
-#include <SoftwareSerial.h>
 
 
 //typedef enum runMode = {r/aw, filtered};
@@ -31,7 +30,6 @@ private:
     byte payload[payloadSize];
     byte response[responseSize];
     unsigned int payloadLength;
-    SoftwareSerial *serialPort;
     byte msgStartFlag[2] = {0xA0, 0xA1},
     msgEndFlag[2] = {0x0D, 0x0A};
 
@@ -46,7 +44,7 @@ private:
 
 public:
     char sentence[sentenceSize];    // I think i like the sentence as a public member, since the obligation to create another c string to retreive data from the library is redundant and annoying.
-    Mercury (SoftwareSerial *serial);            //ctor, sets the member software serial pointer to the ctor argument
+    Mercury ();            //ctor, sets the member software serial pointer to the ctor argument
     void begin(int baud);                       //set software serial port baud rate
     void setRunMode(runMode newMode);              //set whether or not to filter incoming data
 
@@ -82,7 +80,7 @@ public:
     bool setWaas(bool enable);                  //I don't really know what WAAS is, but it's easy to configure and sounded like it could be a useful setting
     bool getWaas(char* buffer);                 //fills the buffer with the WAAS status
 
-    bool setSaveMode(bool permanent = false);   //sets whether or not configuration of the gps is permanent. I recommend against unless you know you won't break the board.
+    bool setSaveMode(bool permanent);   //sets whether or not configuration of the gps is permanent. I recommend against unless you know you won't break the board.
     bool getSaveMode();                         //returns the saveMode member variable, in case you need it
 
     bool setPositionPinning(bool enable);       //configures position pinning

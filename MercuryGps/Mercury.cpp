@@ -1,5 +1,4 @@
 #include "Mercury.h"
-#include <SoftwareSerial.h>
 
 
 
@@ -7,9 +6,7 @@
 
 
 
-Mercury::Mercury (SoftwareSerial *serial){
-    serialPort = serial;
-
+Mercury::Mercury (){
     //library settings
     sentenceFlag = '$';
     setRunMode(raw);
@@ -34,7 +31,7 @@ unsigned int Mercury::getTimeout(){
 
 
 void Mercury::begin(int baud){
-    serialPort->begin(baud);
+    Serial1.begin(baud);
 }
 
 
@@ -42,13 +39,13 @@ void Mercury::begin(int baud){
 void Mercury::readRawLine(){
     charPos = 0;
     memset(sentence, '\0', 100);
-    while( readChar != '$' ) readChar = serialPort->read();
+    while( readChar != '$' ) readChar = Serial1.read();
     sentence[charPos] = readChar;
     charPos++;
 
     do{
-        while(serialPort->available() == 0);
-        readChar = serialPort->read();
+        while(Serial1.available() == 0);
+        readChar = Serial1.read();
         sentence[charPos] = readChar;
         charPos++;
     }
