@@ -4,7 +4,7 @@
 
 #include "Arduino.h"
 
-#ifdef _VARIANT_ARDUINO_DUE_X_
+#ifdef _VARIANT_ARDUINO_DUE_X_ || defined(__AVR_ATmega2560__)
 #else
     #include <SoftwareSerial.h>
 #endif

@@ -1,8 +1,8 @@
 #include "Mercury.h"
 
+// could be useful https://blogs.msdn.microsoft.com/abhinaba/2016/02/21/identifying-your-arduino-board-from-code/
 
-
-#ifdef _VARIANT_ARDUINO_DUE_X_
+#ifdef _VARIANT_ARDUINO_DUE_X_ || defined(__AVR_ATmega2560__)
     Mercury::Mercury (HardwareSerial *serial){
         serialPort = serial;
 

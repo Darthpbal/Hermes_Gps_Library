@@ -10,7 +10,7 @@ port monitor to just echo that data to the arduino ide serial monitor.
 
 #include <Mercury.h>             //include the library
 
-#ifdef _VARIANT_ARDUINO_DUE_X_
+#ifdef _VARIANT_ARDUINO_DUE_X_ || defined(__AVR_ATmega2560__)
     Mercury venus(&Serial1);         // declare an instance of the library, passing the software serial object to the Mercury constructor.
 #else
     #include <SoftwareSerial.h>     //include SoftwareSerial
