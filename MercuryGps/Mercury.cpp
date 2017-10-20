@@ -2,7 +2,19 @@
 
 // could be useful https://blogs.msdn.microsoft.com/abhinaba/2016/02/21/identifying-your-arduino-board-from-code/
 
-#ifdef _VARIANT_ARDUINO_DUE_X_ || defined(__AVR_ATmega2560__)
+#ifdef _VARIANT_ARDUINO_DUE_X_
+    Mercury::Mercury (HardwareSerial *serial){
+        serialPort = serial;
+
+        //library settings
+        sentenceFlag = '$';
+        setRunMode(raw);
+        setGpsTag("GPGGA");
+        setTimeout(5000);
+        setSaveMode(false);
+        clearLine();
+    }
+#elif ARDUINO_AVR_MEGA2560
     Mercury::Mercury (HardwareSerial *serial){
         serialPort = serial;
 

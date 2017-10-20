@@ -4,7 +4,8 @@
 
 #include "Arduino.h"
 
-#ifdef _VARIANT_ARDUINO_DUE_X_ || defined(__AVR_ATmega2560__)
+#ifdef _VARIANT_ARDUINO_DUE_X_
+#elif ARDUINO_AVR_MEGA2560
 #else
     #include <SoftwareSerial.h>
 #endif
@@ -40,6 +41,8 @@ private:
 
     #ifdef _VARIANT_ARDUINO_DUE_X_
         HardwareSerial * serialPort;
+    #elif ARDUINO_AVR_MEGA2560
+        HardwareSerial * serialPort;
     #else
         SoftwareSerial *serialPort;
     #endif
@@ -64,6 +67,8 @@ public:
     char sentence[sentenceSize];    // I think i like the sentence as a public member, since the obligation to create another c string to retreive data from the library is redundant and annoying.
 
     #ifdef _VARIANT_ARDUINO_DUE_X_
+        Mercury (HardwareSerial *serial);            //ctor, sets the member software serial pointer to the ctor argument
+    #elif ARDUINO_AVR_MEGA2560
         Mercury (HardwareSerial *serial);            //ctor, sets the member software serial pointer to the ctor argument
     #else
         Mercury (SoftwareSerial *serial);            //ctor, sets the member software serial pointer to the ctor argument

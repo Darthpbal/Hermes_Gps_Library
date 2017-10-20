@@ -1,6 +1,8 @@
 #include <Mercury.h>             //include the library
 
-#ifdef _VARIANT_ARDUINO_DUE_X_ || defined(__AVR_ATmega2560__)
+#ifdef _VARIANT_ARDUINO_DUE_X_
+    Mercury venus(&Serial1);         // declare an instance of the library, passing the software serial object to the Mercury constructor.
+#elif ARDUINO_AVR_MEGA2560
     Mercury venus(&Serial1);         // declare an instance of the library, passing the software serial object to the Mercury constructor.
 #else
     #include <SoftwareSerial.h>     //include SoftwareSerial
