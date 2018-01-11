@@ -242,4 +242,49 @@ demo over
 
 
 
+
+GPS NMEA sentence structure
+
+2D location: GPRMC (Recommended minimum content)
+$GPRMC,115949.000,V,0000.0000,N,00000.0000,E,000.0,000.0,280606,,,N*7D
+
+$GPRMC,               GPS sentence type tag
+115949.000,           UTC time   HHMMSS
+V,
+0000.0000,            Latitude
+N,                    direction
+00000.0000,           Longitude
+E,                    direction
+000.0,
+000.0,
+280606,
+,
+,
+N*7D                  checksum
+
+
+
+
+
+
+3D location: GPGGA
+$GPGGA,115950.000,0000.0000,N,00000.0000,E,0,00,0.0,0.0,M,0.0,M,,0000*64
+
+$GPGGA,
+115950.000,
+0000.0000,
+N,
+00000.0000,
+E,
+0,
+00,
+0.0,
+0.0,
+M,
+0.0,
+M,
+,
+0000*64
+
+
 */
