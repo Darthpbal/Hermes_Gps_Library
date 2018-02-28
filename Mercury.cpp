@@ -68,6 +68,7 @@ void Mercury::begin(int baud){
 void Mercury::readRawLine(){
     charPos = 0;
     memset(sentence, '\0', 100);
+    unsigned long startRawTime = millis();
     while( readChar != '$' ) readChar = serialPort->read();
     sentence[charPos] = readChar;
     charPos++;
@@ -78,7 +79,7 @@ void Mercury::readRawLine(){
         sentence[charPos] = readChar;
         charPos++;
     }
-    while( (readChar != '\r') && (charPos < sentenceSize) );
+    while( (readChar != '\r') && (charPos < sentenceSize) && ( (millis() - startRawTime) < timeout ));
 
     sentence[charPos - 1] = '\0';
 }
@@ -93,6 +94,7 @@ int Mercury::geLineSize(){
 
 void Mercury::readFilteredLine(){
     tagDetected = false;
+    unsigned long startFilterTime = millis();
     do{
         readRawLine();
 
@@ -100,7 +102,7 @@ void Mercury::readFilteredLine(){
         if( (sentence[3] == gpsTag[2]) && (sentence[4] == gpsTag[3]) && (sentence[5] == gpsTag[4]) ) tagDetected = true;
         else tagDetected = false;
     }
-    while(tagDetected == false);
+    while( (tagDetected == false) && ( (millis() - startFilterTime) < timeout ) );
 }
 
 
